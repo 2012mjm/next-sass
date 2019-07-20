@@ -1,0 +1,18 @@
+{
+    "name": "@2012mjm/next-sass",
+    "version": "0.0.1",
+    "main": "index.js",
+    "license": "MIT",
+    "repository": "2012mjm/next-sass",
+    "dependencies": {
+        "@zeit/next-css": "1.0.1",
+        "sass-loader": "6.0.6"
+    },
+    "devDependencies": {
+        "node-sass": "^4.7.2",
+        "extract-css-chunks-webpack-plugin": "^4.5.3"
+    },
+    "peerDependencies": {
+        "node-sass": "^4.7.2"
+    }
+}
