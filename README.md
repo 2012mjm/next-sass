@@ -2,6 +2,8 @@
 
 Import `.sass` or `.scss` files in your Next.js project
 
+Notice: this library supports simultaneously the Sass modules and Sass, it also has the ability to chunk css files for each components.
+
 ## Installation
 
 ```
