@@ -12,10 +12,15 @@ module.exports = (nextConfig = {}) => {
       }
 
       const { dev, isServer } = options;
+
       const {
         cssLoaderOptions,
         postcssLoaderOptions,
-        sassLoaderOptions = {}
+        sassLoaderOptions = {},
+        cssExtractOutput = {
+          filename: { dev: null, prod: null },
+          chunkFilename: { dev: null, prod: null }
+        }
       } = nextConfig;
 
       options.defaultLoaders.sass = cssModules =>
@@ -64,18 +69,25 @@ module.exports = (nextConfig = {}) => {
             config.plugins.splice(index, 1);
         });
 
-        config.plugins.push(
-          new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: dev
-              ? 'static/css/[name].css'
-              : 'static/css/[contenthash:8].css',
-            chunkFilename: dev
-              ? 'static/css/[name].chunk.css'
-              : 'static/css/[contenthash:16].css'
-          })
-        );
+        var miniCssExtractPlugin = {
+          filename: dev
+            ? 'static/css/[name].css'
+            : 'static/css/[name].[contenthash:8].css',
+          chunkFilename: dev
+            ? 'static/css/[name].chunk.css'
+            : 'static/css/[name].[contenthash:8].chunk.css'
+        };
+
+        if (cssExtractOutput.filename[dev ? 'dev' : 'prod']) {
+          miniCssExtractPlugin.filename =
+            cssExtractOutput.filename[dev ? 'dev' : 'prod'];
+        }
+        if (cssExtractOutput.chunkFilename[dev ? 'dev' : 'prod']) {
+          miniCssExtractPlugin.chunkFilename =
+            cssExtractOutput.chunkFilename[dev ? 'dev' : 'prod'];
+        }
+
+        config.plugins.push(new MiniCssExtractPlugin(miniCssExtractPlugin));
       }
 
       config.optimization = {

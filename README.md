@@ -99,6 +99,28 @@ const Component = props => {
 export default Component
 ```
 
+
+
+### Extract css initialize
+
+```js
+// next.config.js
+const withSass = require('@2012mjm/next-sass')
+
+module.exports = withSass({
+  cssExtractOutput: {
+    filename: {
+      dev: 'static/css/[name].css',
+      prod: 'static/css/[contenthash:8].css'
+    },
+    chunkFilename: {
+      dev: 'static/css/[name].chunk.css',
+      prod: 'static/css/[contenthash:16].css'
+    }
+  }
+})
+```
+
 Your exported HTML will then reflect locally scoped CSS class names.
 
 For a list of supported options, [refer to the webpack `css-loader` README](https://github.com/webpack-contrib/css-loader#options).
@@ -173,7 +195,6 @@ module.exports = withSass({
   }
 })
 ```
-
 
 ### Configuring Next.js
 
