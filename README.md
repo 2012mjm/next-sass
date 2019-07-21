@@ -21,7 +21,7 @@ yarn add @2012mjm/next-sass node-sass
 The stylesheet is compiled to `.next/static/css`. Next.js will automatically add the css file to the HTML. 
 In production a chunk hash is added so that styles are updated when a new version of the stylesheet is deployed.
 
-### Without CSS modules
+### Config
 
 Create a `next.config.js` in your project
 
@@ -33,7 +33,7 @@ module.exports = withSass({
 })
 ```
 
-Create a Sass file `styles.scss`
+Create a Sass file `styles.scss`, this is without Sass modules
 
 ```scss
 $font-size: 50px;
@@ -42,7 +42,7 @@ $font-size: 50px;
 }
 ```
 
-And Sass module using `styles.module.scss`
+And use the `module.scss` extension for the Sass module, for example: `styles.module.scss`
 
 Create a page file `pages/index.js`
 
@@ -52,7 +52,7 @@ import "../styles.scss"
 export default () => <div className="example">Hello World!</div>
 ```
 
-And Sass module
+And use this for Sass module
 
 ```js
 import styles from "../styles.module.scss"
@@ -60,7 +60,7 @@ import styles from "../styles.module.scss"
 export default () => <div className={styles.example}>Hello World!</div>
 ```
 
-### With CSS modules and options
+### With options
 
 You can also pass a list of options to the `css-loader` by passing an object called `cssLoaderOptions`.
 
@@ -76,32 +76,6 @@ module.exports = withSass({
   }
 })
 ```
-
-Create a SCSS file `style.scss`
-
-```css
-.example {
-  font-size: 50px;
-}
-```
-
-Create a page file `pages/index.js` that imports your stylesheet and uses the hashed class name from the stylesheet
-
-```js
-import css from "../style.scss"
-
-const Component = props => {
-  return (
-    <div className={css.example}>
-      ...
-    </div>
-  )
-}
-
-export default Component
-```
-
-
 
 ### Extract css initialize
 
